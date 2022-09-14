@@ -83,7 +83,7 @@ module.exports = (blingProduct, variations, storeId, auth, isNew = true) => new 
     available: blingProduct.situacao === 'Ativo',
     sku,
     name,
-    quantity: Number(blingProduct.estoqueAtual || 0),
+    quantity: parseInt(blingProduct.estoqueAtual || 0),
     cost_price: blingProduct.preco_custo
   }
 
@@ -208,7 +208,7 @@ module.exports = (blingProduct, variations, storeId, auth, isNew = true) => new 
             variation.name = `${name} / ${specTexts.join(' / ')}`.substring(0, 100)
             variation.sku = variacao.codigo
             variation.specifications = specifications
-            variation.quantity = Number(variacao.estoqueAtual || 0)
+            variation.quantity = parseInt(variacao.estoqueAtual || 0)
             const price = parseFloat(variacao.preco || variacao.vlr_unit)
             if (price) {
               variation.price = price

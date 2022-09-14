@@ -3,6 +3,7 @@ module.exports = situacao => {
   switch (situacao) {
     case 'venda agenciada':
     case 'aprovado':
+    case 'pronto para emitir nfe-e':
       financialStatus = 'paid'
       break
     case 'em andamento':
@@ -10,7 +11,7 @@ module.exports = situacao => {
       break
     case 'faturado':
     case 'atendido':
-      fulfillmentStatus = 'invoice_issued'
+      fulfillmentStatus = 'shipped'
       break
     case 'pronto para envio':
       fulfillmentStatus = 'ready_for_shipping'
