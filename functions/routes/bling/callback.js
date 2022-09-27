@@ -5,6 +5,7 @@ const updateAppData = require('./../../lib/store-api/update-app-data')
 const importProduct = require('./../../lib/integration/import-product')
 
 exports.post = ({ appSdk, admin }, req, res) => {
+  console.log('Callback Bling', req)
   const startTime = Date.now()
   const blingToken = req.query.token
   const storeId = parseInt(req.query.store_id, 10)
