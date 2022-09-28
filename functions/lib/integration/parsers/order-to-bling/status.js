@@ -39,7 +39,7 @@ module.exports = order => {
   }
 
   if (financialStatus && financialStatus === 'paid') {
-    return ['pronto para emitir nfe-e', 'em aberto']
+    return ['Pronto para emitir NF-e']
   }
   return 'em aberto'
 }
