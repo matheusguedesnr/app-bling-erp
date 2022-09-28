@@ -38,6 +38,7 @@ module.exports = ({ appSdk, storeId, auth }, blingToken, blingStore, blingDeposi
         })
 
         .then(({ data }) => {
+          console.log('Body pedido :', JSON.stringify(data))
           const blingStatus = parseStatus(order)
           const hasFoundByNumber = Boolean(Array.isArray(data.pedidos) && data.pedidos.length)
           let originalBlingOrder
