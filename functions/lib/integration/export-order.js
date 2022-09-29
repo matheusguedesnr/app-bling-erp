@@ -118,6 +118,8 @@ module.exports = ({ appSdk, storeId, auth }, blingToken, blingStore, blingDeposi
                 let blingStatusObj
                 const findBlingStatus = statusLabel => {
                   blingStatusObj = data.situacoes.find(({ situacao }) => {
+                    console.log('Status bling', situacao.nome && situacao.nome.toLowerCase())
+                    console.log('Status label', statusLabel)
                     return situacao.nome && situacao.nome.toLowerCase() === statusLabel
                   })
                 }
