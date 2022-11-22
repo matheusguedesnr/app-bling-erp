@@ -165,13 +165,13 @@ exports.post = ({ appSdk, admin }, req, res) => {
                   case 'orders':
                     if (trigger.body) {
                       canCreateNew = appData.new_orders ? undefined : false
-                      setTimeout(() => {
+                      
                         integrationConfig = {
                           _exportation: {
                             order_ids: [resourceId]
                           }
                         }
-                      }, 2000)
+                      
                     }
                     break
 
