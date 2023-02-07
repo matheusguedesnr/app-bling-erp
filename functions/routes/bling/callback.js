@@ -14,7 +14,9 @@ const sendMessageTopic = async (eventName, json) => {
 }
 
 exports.post = ({ appSdk, admin }, req, res) => {
-  // const startTime = Date.now()
+
+  console.log('Callback Bling', req)
+  const startTime = Date.now()
   const blingToken = req.query.token
   const storeId = parseInt(req.query.store_id, 10)
 

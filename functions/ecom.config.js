@@ -7,7 +7,7 @@
 
 const app = {
   app_id: 114142,
-  title: 'Bling ERP',
+  title: 'Bling ERP Disfoil',
   slug: 'bling-erp',
   type: 'external',
   state: 'active',
