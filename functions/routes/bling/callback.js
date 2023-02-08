@@ -24,7 +24,7 @@ exports.post = ({ appSdk, admin }, req, res) => {
     }
 
     if (retorno) {
-      console.log('Callback Bling', JSON.stringify(retorno))
+      console.log('Callback Bling:', JSON.stringify(retorno))
       /*
       TODO: check Bling server IPs
       const clientIp = req.get('x-forwarded-for') || req.connection.remoteAddress
