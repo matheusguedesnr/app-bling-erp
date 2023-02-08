@@ -285,6 +285,6 @@
       "hide": true
     }
   },
-  "auth_callback_uri": "https://us-central1-ecom-bling.cloudfunctions.net/app/ecom/auth-callback",
+  "auth_callback_uri": "https://us-central1-bling-e-complus.cloudfunctions.net/app/ecom/auth-callback",
   "version": "1.4.4"
 }
