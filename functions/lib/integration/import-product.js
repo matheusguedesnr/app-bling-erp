@@ -147,14 +147,14 @@ module.exports = ({ appSdk, storeId, auth }, blingToken, blingStore, blingDeposi
                   if (deposit && deposit.deposito) {
                     const quantity = Number(deposit.deposito.saldo)
                     if (!isNaN(quantity)) {
-                      blingItem.estoqueAtual = quantity
+                      blingItem.estoqueAtual = parseInt(quantity)
                       delete blingItem.depositos
                     }
                   }
                 }
               })
             }
-            let quantity = Number(blingProduct.estoqueAtual)
+            let quantity = parseInt(blingProduct.estoqueAtual)
             if (product && (isStockOnly === true || !appData.update_product || variationId)) {
               if (!isNaN(quantity)) {
                 if (quantity < 0) {
