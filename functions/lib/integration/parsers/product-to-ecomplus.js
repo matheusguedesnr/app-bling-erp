@@ -78,15 +78,12 @@ const tryImageUpload = (storeId, auth, originImgUrl, product) => new Promise(res
 module.exports = (blingProduct, variations, storeId, auth, isNew = true) => new Promise((resolve, reject) => {
   const sku = blingProduct.codigo
   const name = (blingProduct.descricao || sku).trim()
-  const validateStock = (product) => {
-    return product.estoqueAtual && product.estoqueAtual > 0 ? product.estoqueAtual : 0
-  }
 
   const product = {
     available: blingProduct.situacao === 'Ativo',
     sku,
     name,
-    quantity: Number(validateStock(blingProduct)),
+    quantity: parseInt(blingProduct.estoqueAtual || 0),
     cost_price: blingProduct.preco_custo
   }
 
@@ -211,7 +208,7 @@ module.exports = (blingProduct, variations, storeId, auth, isNew = true) => new 
             variation.name = `${name} / ${specTexts.join(' / ')}`.substring(0, 100)
             variation.sku = variacao.codigo
             variation.specifications = specifications
-            variation.quantity = Number(validateStock(variacao))
+            variation.quantity = parseInt(variacao.estoqueAtual || 0)
             const price = parseFloat(variacao.preco || variacao.vlr_unit)
             if (price) {
               variation.price = price
@@ -234,8 +231,6 @@ module.exports = (blingProduct, variations, storeId, auth, isNew = true) => new 
     })
     return Promise.all(promises).then(() => resolve(product))
   }
-  if (Number(storeId) === 2230) {
-    console.log('Sobrescrevendo produto', JSON.stringify(product))
-  }
+
   resolve(product)
 })

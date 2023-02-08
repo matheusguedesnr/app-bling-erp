@@ -38,6 +38,7 @@ module.exports = ({ appSdk, storeId, auth }, blingToken, blingStore, blingDeposi
         })
 
         .then(({ data }) => {
+          console.log('Body pedido :', JSON.stringify(order))
           const blingStatus = parseStatus(order)
           const hasFoundByNumber = Boolean(Array.isArray(data.pedidos) && data.pedidos.length)
           let originalBlingOrder
@@ -66,7 +67,6 @@ module.exports = ({ appSdk, storeId, auth }, blingToken, blingStore, blingDeposi
           if (!originalBlingOrder) {
             if (appData.approved_orders_only) {
               switch (blingStatus) {
-                case 'pendente':
                 case 'em aberto':
                 case 'cancelado':
                   console.log(`${logHead}skipped with status "${blingStatus}"`)
@@ -118,6 +118,8 @@ module.exports = ({ appSdk, storeId, auth }, blingToken, blingStore, blingDeposi
                 let blingStatusObj
                 const findBlingStatus = statusLabel => {
                   blingStatusObj = data.situacoes.find(({ situacao }) => {
+                    console.log('Status bling', situacao.nome && situacao.nome.toLowerCase())
+                    console.log('Status label', statusLabel)
                     return situacao.nome && situacao.nome.toLowerCase() === statusLabel
                   })
                 }
