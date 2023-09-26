@@ -1,14 +1,12 @@
-const { firestore } = require('firebase-admin')
 const getAppData = require('./../../lib/store-api/get-app-data')
 const updateAppData = require('../store-api/update-app-data')
-const { getFirestore } = firestore
 
 module.exports = async ({ appSdk }) => {
   const d = new Date()
   d.setHours(d.getHours() - 12)
   const storeId = 51266
   const endpoint = '/orders.json' +
-    '?financial_status.current=paid' +
+    '?financial_status.current=paid&fulfillment_status.current=null' +
     `&financial_status.updated_at>=${d.toISOString()}` +
     `&updated_at<=${(new Date(Date.now() - 1000 * 60 * 5).toISOString())}` +
     '&fields=_id,number' +
@@ -16,15 +14,12 @@ module.exports = async ({ appSdk }) => {
   const { response } = await appSdk.apiRequest(storeId, endpoint, 'GET')
   const { data: { result } } = response
   console.log('Pedidos buscados', JSON.stringify(result))
-  const db = getFirestore()
   const ordersToQueue = []
   for (let i = 0; i < result.length; i++) {
     const orderId = result[i]
-    if (!(await db.doc(`exported_orders/${orderId}`).get()).exists) {
-      ordersToQueue.push(orderId)
-    }
+    ordersToQueue.push(orderId)
   }
-  console.log(ordersToQueue.length)
+  console.log('Tamanho de pedidos antes', ordersToQueue.length)
   if (ordersToQueue.length) {
     const appData = await getAppData({ appSdk, storeId })
     const action = 'exportation'
@@ -38,6 +33,7 @@ module.exports = async ({ appSdk }) => {
         queueList.unshift(nextId)
       }
     })
+  console.log('Tamanho de pedidos', queueList.length)
     await updateAppData({ appSdk, storeId }, {
       [action]: {
         ...appData[action],
