@@ -1,6 +1,7 @@
-const { getFirestore } = require('firebase-admin/firestore')
+const { firestore } = require('firebase-admin')
 const getAppData = require('./../../lib/store-api/get-app-data')
 const updateAppData = require('../store-api/update-app-data')
+const { getFirestore } = firestore
 
 module.exports = async ({ appSdk }) => {
   const d = new Date()
