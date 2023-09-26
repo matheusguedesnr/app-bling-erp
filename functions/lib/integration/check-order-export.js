@@ -1,5 +1,3 @@
-// DO NOT COPY TO v2
-const logger = require('firebase-functions/logger')
 const { getFirestore } = require('firebase-admin/firestore')
 const getAppData = require('./../../lib/store-api/get-app-data')
 const updateAppData = require('../store-api/update-app-data')
@@ -44,5 +42,5 @@ module.exports = async ({ appSdk }) => {
       }
     })
   }
-  logger.info(`${ordersToQueue.length} orders to queue`, { ordersToQueue })
+  console.log(`${ordersToQueue.length} orders to queue`, { ordersToQueue })
 }
