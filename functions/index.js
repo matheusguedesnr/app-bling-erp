@@ -157,6 +157,7 @@ const checkExportedOrders = require('./lib/integration/check-order-export')
 exports.checkExportedOrders = functions.runWith({ timeoutSeconds: 300 })
   .pubsub.schedule('12 */1 * * *').onRun(() => {
     return prepareAppSdk().then(appSdk => {
+      console.log('executando')
       checkExportedOrders({ appSdk })
     })
 })
