@@ -19,7 +19,7 @@ module.exports = async ({ appSdk }) => {
     const orderId = result[i]
     ordersToQueue.push(orderId)
   }
-  console.log('Tamanho de pedidos antes', ordersToQueue.length)
+  console.log('Antes da fila', ordersToQueue.length)
   if (ordersToQueue.length) {
     const appData = await getAppData({ appSdk, storeId })
     const action = 'exportation'
@@ -33,7 +33,7 @@ module.exports = async ({ appSdk }) => {
         queueList.unshift(nextId)
       }
     })
-  console.log('Tamanho de pedidos', queueList.length)
+  console.log('Já com a fila', queueList.length)
     await updateAppData({ appSdk, storeId }, {
       [action]: {
         ...appData[action],
