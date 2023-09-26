@@ -152,3 +152,11 @@ const clearOrderStates = require('./lib/integration/clear-order-states')
 const clearStatesCron = '56 13 * * *'
 exports.scheduledClear = functions.pubsub.schedule(clearStatesCron).onRun(clearOrderStates)
 console.log(`-- Sheduled clearing order stored states '${clearStatesCron}'`)
+
+const checkExportedOrders = require('./lib/integration/check-order-export')
+exports.checkExportedOrders = functions.runWith({ timeoutSeconds: 300 })
+  .pubsub.schedule('12 */1 * * *').onRun(() => {
+    return prepareAppSdk().then(appSdk => {
+      checkExportedOrders({ appSdk })
+    })
+})

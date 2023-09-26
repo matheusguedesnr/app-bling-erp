@@ -28,7 +28,7 @@ module.exports = ({ appSdk, storeId, auth }, blingToken, blingStore, blingDeposi
         }
       }
       const bling = new Bling(blingToken)
-      console.log('Body pedido 1 :', JSON.stringify(order))
+      console.log('Body pedido 1 :', orderId,  JSON.stringify(order))
       const job = bling.get(`/pedido/${(blingOrderNumber || order.number)}`)
         .catch(err => {
           if (err.response && err.response.status === 404) {
@@ -39,8 +39,8 @@ module.exports = ({ appSdk, storeId, auth }, blingToken, blingStore, blingDeposi
         })
 
         .then(({ data }) => {
-          console.log('Body pedido 2 :')
           const blingStatus = parseStatus(order)
+          console.log('Body pedido 2 :', blingStatus)
           const hasFoundByNumber = Boolean(Array.isArray(data.pedidos) && data.pedidos.length)
           let originalBlingOrder
           if (hasFoundByNumber) {
