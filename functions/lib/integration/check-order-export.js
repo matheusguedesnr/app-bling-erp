@@ -15,6 +15,7 @@ module.exports = async ({ appSdk }) => {
     '&sort=created_at'
   const { response } = await appSdk.apiRequest(storeId, endpoint, 'GET')
   const { data: { result } } = response
+  console.log('Pedidos buscados', JSON.stringify(result))
   const db = getFirestore()
   const ordersToQueue = []
   for (let i = 0; i < result.length; i++) {
@@ -23,6 +24,7 @@ module.exports = async ({ appSdk }) => {
       ordersToQueue.push(orderId)
     }
   }
+  console.log(ordersToQueue.length)
   if (ordersToQueue.length) {
     const appData = await getAppData({ appSdk, storeId })
     const action = 'exportation'
