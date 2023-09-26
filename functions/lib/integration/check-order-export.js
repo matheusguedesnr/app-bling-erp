@@ -7,7 +7,7 @@ const updateAppData = require('../store-api/update-app-data')
 module.exports = async ({ appSdk }) => {
   const d = new Date()
   d.setHours(d.getHours() - 12)
-  const storeId = 1032
+  const storeId = 51266
   const endpoint = '/orders.json' +
     '?financial_status.current=paid' +
     `&financial_status.updated_at>=${d.toISOString()}` +
