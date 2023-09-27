@@ -16,7 +16,7 @@ module.exports = async ({ appSdk }) => {
   console.log('Pedidos buscados', JSON.stringify(result))
   const ordersToQueue = []
   for (let i = 0; i < result.length; i++) {
-    const orderId = result[i]
+    const orderId = result[i]._id
     ordersToQueue.push(orderId)
   }
   console.log('Antes da fila', ordersToQueue.length)
