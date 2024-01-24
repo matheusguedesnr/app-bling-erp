@@ -1,4 +1,5 @@
 module.exports = situacao => {
+  console.log('situacao pedido bling: ', situacao)
   let financialStatus, fulfillmentStatus
   switch (situacao) {
     case 'venda agenciada':
