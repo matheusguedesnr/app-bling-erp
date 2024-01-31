@@ -17,6 +17,7 @@ const getLastStatus = records => {
 module.exports = ({ appSdk, storeId, auth }, blingToken, blingStore, blingDeposit, queueEntry, appData) => {
   const blingOrderNumber = queueEntry.nextId
   const bling = new Bling(blingToken)
+  console.log('import order', blingOrderNumber)
 
   const job = bling.get(`/pedido/${blingOrderNumber}`)
     .then(({ data }) => {
@@ -62,6 +63,7 @@ module.exports = ({ appSdk, storeId, auth }, blingToken, blingStore, blingDeposi
               }
 
               const { fulfillmentStatus, financialStatus } = parseStatus(situacao)
+              console.log('situacoes de retorno', fulfillmentStatus, financialStatus)
               const data = {
                 date_time: new Date().toISOString(),
                 flags: ['from-bling']

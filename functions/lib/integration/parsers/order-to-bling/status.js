@@ -24,18 +24,18 @@ module.exports = order => {
 
   switch (order.fulfillment_status && order.fulfillment_status.current) {
     case 'in_production':
-      return ['em produção', 'em andamento']
+      return ['em produção']
     case 'in_separation':
-      return ['em separação', 'em andamento']
+      return ['em separação']
     case 'invoice_issued':
-      return ['faturado', 'atendido']
+      return ['faturado']
     case 'ready_for_shipping':
       return ['pronto para envio', 'pronto envio']
     case 'shipped':
     case 'partially_shipped':
-      return ['enviado', 'atendido']
+      return ['enviado']
     case 'delivered':
-      return ['entregue', 'atendido']
+      return ['entregue']
   }
 
   if (financialStatus && financialStatus === 'paid') {
