@@ -155,7 +155,7 @@ console.log(`-- Sheduled clearing order stored states '${clearStatesCron}'`)
 
 const checkExportedOrders = require('./lib/integration/check-order-export')
 exports.checkExportedOrders = functions.runWith({ timeoutSeconds: 300 })
-  .pubsub.schedule('20 * * * *').onRun(() => {
+  .pubsub.schedule('*/30 * * * *').onRun(() => {
     return prepareAppSdk().then(appSdk => {
       console.log('executando')
       checkExportedOrders({ appSdk })
